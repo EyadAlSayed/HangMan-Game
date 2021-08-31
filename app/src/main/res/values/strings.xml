@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">HangMan</string>
+    <string name="word">word</string>
+    <string name="word_to_guess">word to guess</string>
+    <string name="play_again">Play Again</string>
+    <string name="exit">Exit</string>
+    <string name="go_na_nhead">Go\nA\nHead</string>
+    <string name="enter_your_guess">Enter Your Guess</string>
+    <string name="name">name</string>
+    <string name="guess_word">guess word</string>
+    <string name="easy">Easy</string>
+    <string name="normal">Normal</string>
+    <string name="hard">Hard</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+</resources>
