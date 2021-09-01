@@ -5,8 +5,8 @@ import android.util.Log;
 public class AND extends PlayerMode{
 
     private String input;
-    private int level = -1;
-    private String wordType;
+    private final int level ;
+    private final String wordType;
 
     public AND(WordsPuzzleGame game ,int level,String wordType){
         super.ObjectOfGame = game;

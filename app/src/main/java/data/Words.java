@@ -21,8 +21,7 @@ public class Words {
 
     private final Random rndIdx;
     private final int id;
-    private BufferedReader brd;
-
+    private final BufferedReader brd;
 
     Words(int id){
         this.id = id;
@@ -38,7 +37,7 @@ public class Words {
             word = (word == null) ? brd.readLine() : word;
             brd.close();
         } catch (Exception e) {
-            Log.e("Error","Can't read from A Buffet Reader ..");
+            Log.e("Error","Can't read from A Buffer Reader ..");
         }
         return word;
     }
@@ -66,7 +65,7 @@ public class Words {
         }
         catch (Exception e)
         {
-            Log.e("Erro","Cant get the number of lines ");
+            Log.e("Error","Cant get the number of lines ");
         }
         return num + 1;
     }

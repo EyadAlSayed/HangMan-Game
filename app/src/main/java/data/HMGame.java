@@ -7,9 +7,8 @@ import ui.R;
 
 public class HMGame extends WordsPuzzleGame{
 
-   private String wordToGuess_c,wordToGuess_w,Hintword,wordToplay;
-   private Words wordGenerator;
-   public int count;
+    private String wordToGuess_c,wordToGuess_w,hintWord,wordToPlay;
+    public int count;
 
     public HMGame(){
         this.count = 0;
@@ -18,29 +17,29 @@ public class HMGame extends WordsPuzzleGame{
     @Override
     public void CreateGame(int level,String wordType) {
         try {
-            wordGenerator = INI_Words(level,wordType);
+            Words wordGenerator = INI_Words(level, wordType);
             if(wordGenerator == null) {   throw  new Exception(); }
 
             String []sp = wordGenerator.getWord().split("-");
 
             wordToGuess_w = wordToGuess_c = sp[0];
-            Hintword = sp[1];
+            hintWord = sp[1];
 
-            if(Hintword == null || wordToGuess_w == null) throw new Exception();
+            if(hintWord == null || wordToGuess_w == null) throw new Exception();
 
-             wordToplay = repeatString("_",wordToGuess_w.length());
+            wordToPlay = getEmptyWord(wordToGuess_w.length());
         }
         catch (Exception e)
         {
-            Log.e("Error","Can't creat a new Game ");
+            Log.e("Error","Can't create a new Game ");
         }
 
     }
-    private String repeatString(String s,int n) {
-        String repeated ="";
+    private String getEmptyWord(int n) {
+        StringBuilder repeated = new StringBuilder();
         for (int i=0;i<n;i++)
-           repeated += s;
-        return repeated;
+           repeated.append("_");
+        return repeated.toString();
     }
     private String getAlphWord(String word) {
        word = word.toLowerCase();
@@ -81,32 +80,32 @@ public class HMGame extends WordsPuzzleGame{
         return s.substring(0,idx)+newChar+s.substring(idx+1);
     }
     public String getHiddenWord() {
-        return wordToplay;
+        return wordToPlay;
     }
-    public String getHintWord(){ return Hintword; }
+    public String getHintWord(){ return hintWord; }
     public void nextChar(char ch){
 
         if(isCorrectChar(ch)) {
             int idx = (Character.toUpperCase(ch) == wordToGuess_c.charAt(0)) ? 0:wordToGuess_c.indexOf(Character.toLowerCase(ch));
             ch = idx == 0 ? Character.toUpperCase(ch) : ch;
-            wordToplay = replaceAtIndex(wordToplay,ch,idx);
+            wordToPlay = replaceAtIndex(wordToPlay,ch,idx);
             wordToGuess_c = replaceAtIndex(wordToGuess_c,'_',idx);
         }
         else count++;
     }
     public void nextWord(String word){
         word = getAlphWord(word);
-        if(isCorrectWord(word)) wordToplay = wordToGuess_w;
+        if(isCorrectWord(word)) wordToPlay = wordToGuess_w;
         else count++;
     }
     public int getWrongTry(){  return count;  }
     public GameState getGameState(){
 
-        if(count == 0 && wordToplay.equals(repeatString("_",wordToGuess_w.length()))) { return GameState.newGame; }
+        if(count == 0 && wordToPlay.equals(getEmptyWord(wordToGuess_w.length()))) { return GameState.newGame; }
         else
         if(count == 10) return GameState.lose;
         else
-        if(count < wordToGuess_w.length() && !wordToplay.contains("_"))  return GameState.win;
+        if(count < wordToGuess_w.length() && !wordToPlay.contains("_"))  return GameState.win;
         return GameState.running;
     }
 }

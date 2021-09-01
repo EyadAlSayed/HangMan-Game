@@ -16,23 +16,17 @@ public class MainActivity extends AppCompatActivity {
 
     private static Context context;
     private static RadioButton radioButton;
-    private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        Configuration config = getResources().getConfiguration();
         setContentView(R.layout.activity_main);
-
-
-
-
 
         context = this;
 
-        radioGroup = findViewById(R.id.rdG);
+        RadioGroup radioGroup = findViewById(R.id.rdG);
         radioGroup.setOnCheckedChangeListener(radioChecker);
 
         radioButton = findViewById(R.id.ar_rdBtn);
